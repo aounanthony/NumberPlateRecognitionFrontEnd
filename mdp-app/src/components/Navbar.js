@@ -17,32 +17,32 @@ class Navbar extends Component {
         const authLinks = (
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                <Link className="nav-link" to="/blacklistTable"><b>Table</b></Link>
+                <Link className="nav-link" to="/blacklistTable">Table</Link>
                 </li>
                 <li className="nav-item">
-                <Link className="nav-link" to="/settings"><b>Settings</b></Link>
+                <Link className="nav-link" to="/settings">Settings</Link>
                 </li>
                 <li className="nav-item">
-                <Link className="nav-link" to="/Map"><b>Map</b></Link>
+                <Link className="nav-link" to="/Map">Map</Link>
                 </li>
                 <a href="/" className="nav-link" onClick={this.onLogout.bind(this)}>
-                <b>Logout</b>
+                            Logout
                 </a>
             </ul>
         )
       const guestLinks = (
         <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-                <Link className="nav-link" to="/register"><b>Register</b></Link>
+                <Link className="nav-link" to="/register">Register</Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/login"><b>Login</b></Link>
+                <Link className="nav-link" to="/login">Login</Link>
             </li>
         </ul>
       )
         return(
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/"><b>DETEKT</b></Link>
+                <Link className="navbar-brand" to="/">MDP Projet</Link>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {isAuthenticated ? authLinks : guestLinks}
                 </div>

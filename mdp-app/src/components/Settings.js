@@ -69,8 +69,7 @@ class Settings extends Component {
         const { selectedAction, errors } = this.state;
         return(
         
-        <div className="container half-black" style={{ marginTop: '50px', width: '700px'}}>
-            <hr></hr>
+        <div className="container" style={{ marginTop: '50px', width: '700px'}}>
             <h2 style={{marginBottom: '40px'}}>Settings</h2>
             <form onSubmit={ this.OnSubmitFunc }>
                 <div className="form-group">
@@ -98,8 +97,6 @@ class Settings extends Component {
                         Submit
                     </button>
                 </div>
-                <hr></hr>
-                <hr></hr>
             </form>
         </div>
         )

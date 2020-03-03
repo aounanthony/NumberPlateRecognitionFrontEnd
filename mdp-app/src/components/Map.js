@@ -14,10 +14,8 @@ iconSize:     [43, 27],})
 const detectionIcon = L.icon({ iconUrl: require('../ressources/danger.png'),
 iconSize:     [43, 27],})
 
-var counter = 0;
-
 function getCurrentTimeFromStamp (timestamp) {
-    var d = new Date(timestamp);
+    var d = new Date(timestamp*1000);
     var timeStampCon = d.getDate() + '/' + (d.getMonth()) + '/' + d.getFullYear() + " " + d.getHours() + ':' + d.getMinutes();
 
     return timeStampCon;
@@ -82,7 +80,7 @@ export class MapComp extends Component{
         }
         
     }
-    
+
     startTimer(){
         if(!this.timerId){     
           this.timerId = setInterval(()=>{
@@ -113,11 +111,8 @@ export class MapComp extends Component{
                         }
                     }
                 }
-                counter+=1;
-                newState.counter=counter;
                 newRoute.push(99999999);
                 newState.route=newRoute;
-                
                 
             }
             
@@ -129,7 +124,7 @@ export class MapComp extends Component{
                 console.log(err.response.data)
             });
             
-          }, 5000);
+          }, 3000);
         }
       }
       

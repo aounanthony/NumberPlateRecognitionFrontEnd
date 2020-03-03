@@ -4,15 +4,6 @@ import { connect } from 'react-redux';
 import { surveilAll, getCameras } from '../backendLogic/BusinessLogic';
 import Griddle, {plugins} from 'griddle-react';
 
-var counter =1;
-
-function getCurrentTimeFromStamp (timestamp) {
-    var d = new Date(timestamp);
-    var timeStampCon = d.getDate() + '/' + (d.getMonth()) + '/' + d.getFullYear() + " " + d.getHours() + ':' + d.getMinutes();
-
-    return timeStampCon;
-};
-
 class blacklistTable extends Component {
 
     constructor(props) {
@@ -21,6 +12,7 @@ class blacklistTable extends Component {
         this.state = {
             cameras:this.props.cameras.cameras,
             settings:this.props.settings,
+            blacklistData: [],
             
           }
         }
@@ -64,16 +56,8 @@ class blacklistTable extends Component {
           this.timerId = setInterval(()=>{
             surveilAll(this.state.settings).then(result => {
                 var newState = this.state;
-                newState.blackListData = [];
-                counter+=1;
-                newState.counter= counter;
-                for(var instance=0; instance<result.length; instance++){
-                    var entry={};
-                    entry.ID=result[instance].ID;
-                    entry.Time=getCurrentTimeFromStamp(result[instance].Time);
-                    entry.NbrPlate=result[instance].NbrPlate;
-                    newState.blackListData.push(entry)
-                }
+                newState.blackListData = result;
+                console.log(result);
             if(this._mounted === true){
                 this.setState(newState);
             }
@@ -98,26 +82,22 @@ class blacklistTable extends Component {
               },
             },
             classNames: {
-            Layout: 'griddle griddle-container',
+              Row: 'row-class',
+              Table: 'table-striped, table',
+            },
+            styles: {
+              Filter: { fontSize: 18 },
             },
           };
-        var data = this.state.blackListData;
-        console.log(data);
+        var data = this.state.result;
         return(
-        <div className="container half-black" style={{ marginTop: '50px', width: '1000px'}}>
-        <hr></hr>
-        <Griddle
-            data={data}
-            plugins={[plugins.LocalPlugin]}
-            styleConfig={styleConfig}/>
-            <hr></hr>
-            <hr></hr>
-            <hr></hr>
-        </div>)
-        
+        <div className="container" style={{ marginTop: '50px', width: '1000px'}}>
+        <Griddle results={data}
+        plugins={[plugins.LocalPlugin]}
+        styleConfig={styleConfig}/>
+        </div>
 
-        
-        
+        )
     }
 }
 
